@@ -1,17 +1,12 @@
-import conn
 import json
-import io
 
 
 class Conf():
-    def __init__(self, file: io) -> None:
-        self.file = file
+    '''获取配置文件内存储的所有内容'''
 
-    def getTablesAll(self, database: str):
-        with conn(self.file) as cur:
-            sql = f"""select * form {database}"""
-            cur.execute(sql)
-            return cur.fetchall()
+    def __init__(self) -> None:
+        self.confFile = './config/conf'
 
     def load(self):
-        ...
+        with open(self.confFile) as f:
+            self.conf = json.load(f)
